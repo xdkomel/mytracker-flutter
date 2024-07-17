@@ -46,53 +46,128 @@ class MyTrackerSDKPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        val value = when (call.method) {
-            INIT_METHOD -> init(call)
-            FLUSH_METHOD -> MyTracker.flush()
-            TRACK_EVENT_METHOD -> MyTracker.trackEvent(call.argument(TRACK_EVENT_NAME)!!, call.argument(TRACK_EVENT_PARAMS))
-            TRACK_LOGIN_METHOD -> MyTracker.trackLoginEvent(call.argument(TRACK_USERID)!!, null, call.argument(TRACK_EVENT_PARAMS))
-            TRACK_REGISTRATION_METHOD -> MyTracker.trackRegistrationEvent(call.argument(TRACK_USERID)!!, null, call.argument(TRACK_EVENT_PARAMS))
-            IS_DEBUG_MODE_METHOD -> MyTracker.isDebugMode()
-            SET_DEBUG_MODE_METHOD -> MyTracker.setDebugMode(call.argument(VALUE)!!)
-            GET_ID_METHOD -> MyTracker.getTrackerConfig().id
-            GET_BUFFERING_PERIOD_METHOD -> MyTracker.getTrackerConfig().bufferingPeriod
-            SET_BUFFERING_PERIOD_METHOD -> MyTracker.getTrackerConfig().bufferingPeriod = call.argument(VALUE)!!
-            GET_FORCING_PERIOD_METHOD -> MyTracker.getTrackerConfig().forcingPeriod
-            SET_FORCING_PERIOD_METHOD -> MyTracker.getTrackerConfig().forcingPeriod = call.argument(VALUE)!!
-            GET_LAUNCH_TIMEOUT_METHOD -> MyTracker.getTrackerConfig().launchTimeout
-            SET_LAUNCH_TIMEOUT_METHOD -> MyTracker.getTrackerConfig().launchTimeout = call.argument(VALUE)!!
-            SET_PROXY_HOST_METHOD -> MyTracker.getTrackerConfig().setProxyHost(call.argument(VALUE)).let { }
-            SET_REGION_METHOD -> MyTracker.getTrackerConfig().setRegion(call.argument(VALUE)!!).let { }
-            IS_TRACKING_ENVIRONMENT_ENABLED -> MyTracker.getTrackerConfig().isTrackingEnvironmentEnabled
-            SET_TRACKING_ENVIRONMENT_ENABLED -> MyTracker.getTrackerConfig().isTrackingEnvironmentEnabled = call.argument(VALUE)!!
-            IS_TRACKING_LAUNCH_ENABLED -> MyTracker.getTrackerConfig().isTrackingLaunchEnabled
-            SET_TRACKING_LAUNCH_ENABLED -> MyTracker.getTrackerConfig().isTrackingLaunchEnabled = call.argument(VALUE)!!
-            IS_TRACKING_LOCATION_ENABLED -> MyTracker.getTrackerConfig().isTrackingLocationEnabled
-            SET_TRACKING_LOCATION_ENABLED -> MyTracker.getTrackerConfig().isTrackingLocationEnabled = call.argument(VALUE)!!
-            SET_AGE -> MyTracker.getTrackerParams().age = call.argument(VALUE) ?: -1
-            GET_AGE -> MyTracker.getTrackerParams().age.takeIf { it != -1 }
-            SET_GENDER -> MyTracker.getTrackerParams().gender = call.argument<Int>(VALUE)!! - 1
-            GET_GENDER -> MyTracker.getTrackerParams().gender + 1
-            SET_LANG -> MyTracker.getTrackerParams().lang = call.argument(VALUE)
-            GET_LANG -> MyTracker.getTrackerParams().lang
-            SET_CUSTOM_USER_IDS -> MyTracker.getTrackerParams().customUserIds = call.argument<List<String>>(VALUE)?.toTypedArray()
-            GET_CUSTOM_USER_IDS -> MyTracker.getTrackerParams().customUserIds?.toList()
-            SET_EMAILS -> MyTracker.getTrackerParams().emails = call.argument<List<String>>(VALUE)?.toTypedArray()
-            GET_EMAILS -> MyTracker.getTrackerParams().emails?.toList()
-            SET_PHONES -> MyTracker.getTrackerParams().phones = call.argument<List<String>>(VALUE)?.toTypedArray()
-            GET_PHONES -> MyTracker.getTrackerParams().phones?.toList()
-
-            else -> {
-                result.notImplemented()
-                return
+        when (call.method) {
+            INIT_METHOD -> {
+                init(call)
+                result.success(null)
             }
+            FLUSH_METHOD -> {
+                MyTracker.flush()
+                result.success(null)
+            }
+            TRACK_EVENT_METHOD -> {
+                MyTracker.trackEvent(
+                        call.argument(TRACK_EVENT_NAME)!!,
+                        call.argument(TRACK_EVENT_PARAMS)
+                )
+                result.success(null)
+            }
+            TRACK_LOGIN_METHOD -> {
+                MyTracker.trackLoginEvent(
+                        call.argument(TRACK_USERID)!!,
+                        null,
+                        call.argument(TRACK_EVENT_PARAMS)
+                )
+                result.success(null)
+            }
+            TRACK_REGISTRATION_METHOD -> {
+                MyTracker.trackRegistrationEvent(
+                        call.argument(TRACK_USERID)!!,
+                        null,
+                        call.argument(TRACK_EVENT_PARAMS)
+                )
+                result.success(null)
+            }
+            IS_DEBUG_MODE_METHOD -> result.success(MyTracker.isDebugMode())
+            SET_DEBUG_MODE_METHOD -> {
+                MyTracker.setDebugMode(call.argument(VALUE)!!)
+                result.success(null)
+            }
+            GET_ID_METHOD -> result.success(MyTracker.getTrackerConfig().id)
+            GET_BUFFERING_PERIOD_METHOD ->
+                    result.success(MyTracker.getTrackerConfig().bufferingPeriod)
+            SET_BUFFERING_PERIOD_METHOD -> {
+                MyTracker.getTrackerConfig().bufferingPeriod = call.argument(VALUE)!!
+                result.success(null)
+            }
+            GET_FORCING_PERIOD_METHOD -> result.success(MyTracker.getTrackerConfig().forcingPeriod)
+            SET_FORCING_PERIOD_METHOD -> {
+                MyTracker.getTrackerConfig().forcingPeriod = call.argument(VALUE)!!
+                result.success(null)
+            }
+            GET_LAUNCH_TIMEOUT_METHOD -> result.success(MyTracker.getTrackerConfig().launchTimeout)
+            SET_LAUNCH_TIMEOUT_METHOD -> {
+                MyTracker.getTrackerConfig().launchTimeout = call.argument(VALUE)!!
+                result.success(null)
+            }
+            SET_PROXY_HOST_METHOD -> {
+                MyTracker.getTrackerConfig().setProxyHost(call.argument(VALUE))
+                result.success(null)
+            }
+            SET_REGION_METHOD -> {
+                MyTracker.getTrackerConfig().setRegion(call.argument(VALUE)!!)
+                result.success(null)
+            }
+            IS_TRACKING_ENVIRONMENT_ENABLED ->
+                    result.success(MyTracker.getTrackerConfig().isTrackingEnvironmentEnabled)
+            SET_TRACKING_ENVIRONMENT_ENABLED -> {
+                MyTracker.getTrackerConfig().isTrackingEnvironmentEnabled = call.argument(VALUE)!!
+                result.success(null)
+            }
+            IS_TRACKING_LAUNCH_ENABLED ->
+                    result.success(MyTracker.getTrackerConfig().isTrackingLaunchEnabled)
+            SET_TRACKING_LAUNCH_ENABLED -> {
+                MyTracker.getTrackerConfig().isTrackingLaunchEnabled = call.argument(VALUE)!!
+                result.success(null)
+            }
+            IS_TRACKING_LOCATION_ENABLED ->
+                    result.success(MyTracker.getTrackerConfig().isTrackingLocationEnabled)
+            SET_TRACKING_LOCATION_ENABLED -> {
+                MyTracker.getTrackerConfig().isTrackingLocationEnabled = call.argument(VALUE)!!
+                result.success(null)
+            }
+            SET_AGE -> {
+                MyTracker.getTrackerParams().age = call.argument(VALUE) ?: -1
+                result.success(null)
+            }
+            GET_AGE -> result.success(MyTracker.getTrackerParams().age.takeIf { it != -1 })
+            SET_GENDER -> {
+                MyTracker.getTrackerParams().gender = call.argument<Int>(VALUE)!! - 1
+                result.success(null)
+            }
+            GET_GENDER -> result.success(MyTracker.getTrackerParams().gender + 1)
+            SET_LANG -> {
+                MyTracker.getTrackerParams().lang = call.argument(VALUE)
+                result.success(null)
+            }
+            GET_LANG -> result.success(MyTracker.getTrackerParams().lang)
+            SET_CUSTOM_USER_IDS -> {
+                MyTracker.getTrackerParams().customUserIds =
+                        call.argument<List<String>>(VALUE)?.toTypedArray()
+                result.success(null)
+            }
+            GET_CUSTOM_USER_IDS ->
+                    result.success(MyTracker.getTrackerParams().customUserIds?.toList())
+            SET_EMAILS -> {
+                MyTracker.getTrackerParams().emails =
+                        call.argument<List<String>>(VALUE)?.toTypedArray()
+                result.success(null)
+            }
+            GET_EMAILS -> result.success(MyTracker.getTrackerParams().emails?.toList())
+            SET_PHONES -> {
+                MyTracker.getTrackerParams().phones =
+                        call.argument<List<String>>(VALUE)?.toTypedArray()
+                result.success(null)
+            }
+            GET_PHONES -> result.success(MyTracker.getTrackerParams().phones?.toList())
+            else -> result.notImplemented()
         }
-
-        result.success(if (value is Unit) null else value)
     }
 
     private fun init(call: MethodCall) {
-        contextRef?.get()?.also { MyTracker.initTracker(call.argument(INIT_PARAM_ID)!!, it as Application) }
+        contextRef?.get()?.also {
+            MyTracker.initTracker(call.argument(INIT_PARAM_ID)!!, it as Application)
+        }
 
         activityRef?.get()?.also { MyTracker.trackLaunchManually(it) }
     }
