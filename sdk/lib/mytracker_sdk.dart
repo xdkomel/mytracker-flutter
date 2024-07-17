@@ -128,7 +128,7 @@ class MyTrackerConfig {
   /// MyTracker.trackerConfig.setRegion(MyTrackerRegion.EU)
   /// MyTracker.init(id)
   /// ```
-  Future<MyTrackerConfig> setRegion(MyTrackerRegion region) => _apiChannel.invokeMethod("setRegion", {"value": region.index}).then((value) => this);
+  // Future<MyTrackerConfig> setRegion(MyTrackerRegion region) => _apiChannel.invokeMethod("setRegion", {"value": region.index}).then((value) => this);
 
   /// Returns tracking environment state. Enabled state means that
   /// information about Wi-Fi and mobile networks will be collected.

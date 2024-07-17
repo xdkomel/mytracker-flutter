@@ -104,10 +104,10 @@ class MyTrackerSDKPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                 MyTracker.getTrackerConfig().setProxyHost(call.argument(VALUE))
                 result.success(null)
             }
-            SET_REGION_METHOD -> {
-                MyTracker.getTrackerConfig().setRegion(call.argument(VALUE)!!)
-                result.success(null)
-            }
+            // SET_REGION_METHOD -> {
+            //     MyTracker.getTrackerConfig().setRegion(call.argument(VALUE)!!)
+            //     result.success(null)
+            // }
             IS_TRACKING_ENVIRONMENT_ENABLED ->
                     result.success(MyTracker.getTrackerConfig().isTrackingEnvironmentEnabled)
             SET_TRACKING_ENVIRONMENT_ENABLED -> {
@@ -211,7 +211,7 @@ class MyTrackerSDKPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
         const val SET_PROXY_HOST_METHOD = "setProxyHost"
 
-        const val SET_REGION_METHOD = "setRegion"
+        // const val SET_REGION_METHOD = "setRegion"
 
         const val SET_TRACKING_ENVIRONMENT_ENABLED = "setTrackingEnvironmentEnabled"
         const val IS_TRACKING_ENVIRONMENT_ENABLED = "isTrackingEnvironmentEnabled"

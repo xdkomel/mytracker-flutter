@@ -21,7 +21,7 @@ static NSString *setBufferingPeriodMethod = @"setBufferingPeriod";
 static NSString *setForcingPeriodMethod = @"setForcingPeriod";
 static NSString *setLaunchTimeoutMethod = @"setLaunchTimeout";
 static NSString *setProxyHostMethod = @"setProxyHost";
-static NSString *setRegionMethod = @"setRegion";
+// static NSString *setRegionMethod = @"setRegion";
 static NSString *setTrackingEnvironmentEnabledMethod = @"setTrackingEnvironmentEnabled";
 static NSString *setTrackingLaunchEnabledMethod = @"setTrackingLaunchEnabled";
 static NSString *setTrackingLocationEnabledMethod = @"setTrackingLocationEnabled";
@@ -141,25 +141,25 @@ static NSString *valueParam = @"value";
 	{
 		MRMyTracker.trackerConfig.proxyHost = [self checkedCastWithClass:NSString.class value:arguments[valueParam]];
 	}
-	else if ([setRegionMethod isEqualToString:method])
-	{
-		NSInteger value = ((NSNumber *) arguments[valueParam]).integerValue;
-		MRRegion region;
-		switch (value)
-		{
-			case 0:
-				region = MRRegionRu;
-				break;
-			case 1:
-				region = MRRegionEu;
-				break;
-			default:
-				region = MRRegionNotSet;
-				break;
-		}
+	// else if ([setRegionMethod isEqualToString:method])
+	// {
+	// 	NSInteger value = ((NSNumber *) arguments[valueParam]).integerValue;
+	// 	MRRegion region;
+	// 	switch (value)
+	// 	{
+	// 		case 0:
+	// 			region = MRRegionRu;
+	// 			break;
+	// 		case 1:
+	// 			region = MRRegionEu;
+	// 			break;
+	// 		default:
+	// 			region = MRRegionNotSet;
+	// 			break;
+	// 	}
 
-		MRMyTracker.trackerConfig.region = region;
-	}
+	// 	MRMyTracker.trackerConfig.region = region;
+	// }
 	else if ([setTrackingEnvironmentEnabledMethod isEqualToString:method])
 	{
 		MRMyTracker.trackerConfig.trackEnvironment = ((NSNumber *) arguments[valueParam]).boolValue;
