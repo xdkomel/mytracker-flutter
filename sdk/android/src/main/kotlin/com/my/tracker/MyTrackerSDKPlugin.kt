@@ -46,7 +46,7 @@ class MyTrackerSDKPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        val value: Any? = when (call.method) {
+        val value = when (call.method) {
             INIT_METHOD -> init(call)
             FLUSH_METHOD -> MyTracker.flush()
             TRACK_EVENT_METHOD -> MyTracker.trackEvent(call.argument(TRACK_EVENT_NAME)!!, call.argument(TRACK_EVENT_PARAMS))
